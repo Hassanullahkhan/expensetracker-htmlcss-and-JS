@@ -5,8 +5,25 @@ const transactionListEl = document.getElementById("transaction-list");
 const transactionFormEl = document.getElementById("transaction-form");
 const descriptionEl = document.getElementById("description");
 const amountEl = document.getElementById("amount");
+const incomeSelectBtn = document.getElementById("income-btn");
+const expenseSelectBtn = document.getElementById("expense-btn");
 
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+let transactionType = "income";
+
+// button functionality
+
+incomeSelectBtn.addEventListener("click", () => {
+  transactionType = "income";
+  incomeSelectBtn.classList.add("active");
+  expenseSelectBtn.classList.remove("active");
+});
+
+expenseSelectBtn.addEventListener("click", () => {
+  transactionType = "expense";
+  expenseSelectBtn.classList.add("active");
+  incomeSelectBtn.classList.remove("active");
+});
 
 transactionFormEl.addEventListener("submit", addTransaction);
 
@@ -16,7 +33,20 @@ function addTransaction(event) {
   // get the form values
 
   const description = descriptionEl.value.trim();
-  const amount = parseFloat(amountEl.value); // will change into number
+  let amount = parseFloat(amountEl.value); // will change into number
+
+  // validate that amount is positive
+  if (!description || !amount || amount <= 0) {
+    return;
+  }
+
+  // make amount negative for expenses
+
+  if (transactionType === "expense") {
+    amount = -Math.abs(amount);
+  } else {
+    amount = Math.abs(amount);
+  }
 
   transactions.push({
     id: Date.now(),
@@ -30,6 +60,11 @@ function addTransaction(event) {
   updateSummary();
 
   transactionFormEl.reset();
+
+  // Reset to income by default
+  transactionType = "income";
+  incomeSelectBtn.classList.add("active");
+  expenseSelectBtn.classList.remove("active");
 }
 
 function updateTransactionsList() {
@@ -45,7 +80,7 @@ function updateTransactionsList() {
 function createTransactionElement(transaction) {
   const li = document.createElement("li");
   li.classList.add("transaction");
-  li.classList.add(transaction.amount > 0 ? "income" : "expense");
+  li.classList.add(transaction.amount > 0 ? "#059669" : "#dc2626");
 
   // todo: update the amount formatting
   li.innerHTML = `

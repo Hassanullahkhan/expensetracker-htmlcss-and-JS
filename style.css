@@ -280,6 +280,53 @@ button[type="submit"]:active {
   transform: translateY(0);
 }
 
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* new buttons */
+
+.type-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.type-btn {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #e2e8f0;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.type-btn:hover {
+  background-color: #cbd5e0;
+}
+
+.type-btn.active.income-btn {
+  background-color: #059669;
+  color: white;
+  border: none;
+}
+
+.type-btn.active.expense-btn {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
 @media (max-width: 900px) {
   .main-content {
     grid-template-columns: 1fr;
@@ -318,7 +365,8 @@ button[type="submit"]:active {
     margin-bottom: 20px;
   }
 
-  .income,.expense {
+  .income,
+  .expense {
     display: grid;
   }
 
