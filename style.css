@@ -298,7 +298,7 @@ button[type="submit"]:active {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .container {
     padding: 20px 10px;
     max-width: 100%;
@@ -314,8 +314,12 @@ button[type="submit"]:active {
   }
 
   .balance-container {
-    padding: 20px 15px;
+    padding: 20px 12px;
     margin-bottom: 20px;
+  }
+
+  .income,.expense {
+    display: grid;
   }
 
   .balance-container h2 {
